@@ -19,8 +19,8 @@
 
 1. 克隆仓库
 ```
-git clone https://github.com/yourusername/time-dialog-museum.git
-cd time-dialog-museum
+git clone git@github.com:DjangoJungle/AI-Museum.git
+cd AI-Museum
 ```
 
 2. 安装依赖
@@ -43,7 +43,7 @@ python app.py
 ## 项目结构
 
 ```
-time-dialog-museum/
+AI-Museum/
 ├── app.py              # 主应用文件
 ├── requirements.txt    # 项目依赖
 ├── .env               # 环境变量配置

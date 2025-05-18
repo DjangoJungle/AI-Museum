@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与{{ figure.name }}对话 - 智能博物馆导览</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1><a href="/">智慧博物馆</a></h1>
+                <p class="subtitle">AI赋能的文化探索之旅</p>
+            </div>
+        </header>
+
+        <main class="dialog-page">
+            <div class="dialog-header">
+                <a href="javascript:history.back()" class="back-btn">返回展品</a>
+                <h2>时空对话：与{{ figure.name }}面对面</h2>
+                <p>{{ category }} - {{ item.name }}</p>
+            </div>
+
+            <div class="dialog-container">
+                <div class="character-panel">
+                    <div class="character-avatar figure-{{ figure.name }}"></div>
+                    <div class="character-info">
+                        <h3>{{ figure.name }}</h3>
+                        <p class="character-title">{{ figure.title }}</p>
+                        <p class="character-era">{{ figure.era }}</p>
+                        <div class="character-description">
+                            <p>{{ figure.background }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-section">
+                    <div class="role-selector">
+                        <label for="userRole">选择您的身份：</label>
+                        <select id="userRole">
+                            {% for role in user_roles %}
+                            <option value="{{ role.id }}">{{ role.name }} - {{ role.description }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message historical-figure">
+                                <div class="message-avatar figure-{{ figure.name }}"></div>
+                                <div class="message-content">
+                                    <p>{{ figure.greeting }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="userInput" placeholder="输入您的问题...">
+                            <button id="sendBtn" class="btn primary-btn">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if scenarios %}
+            <section class="historical-scenarios">
+                <h3 class="section-title">历史分岔口</h3>
+                <p class="section-description">探索历史的可能性，体验不同的历史走向</p>
+                
+                <div class="scenarios-container">
+                    {% for scenario in scenarios %}
+                    <div class="scenario-card">
+                        <h4>{{ scenario.title }}</h4>
+                        <p>{{ scenario.description }}</p>
+                        <div class="scenario-options">
+                            {% for option in scenario.options %}
+                            <button class="scenario-option" data-title="{{ scenario.title }}" data-choice="{{ option }}">{{ option }}</button>
+                            {% endfor %}
+                        </div>
+                        <div class="scenario-response" id="scenario-{{ loop.index }}" style="display: none;">
+                            <div class="loading">思考中...</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <section class="time-connection">
+                <h3 class="section-title">时空连线</h3>
+                <p class="section-description">让不同时代的历史人物进行对话，探讨跨越时空的话题</p>
+                
+                <div class="connection-form">
+                    <div class="form-group">
+                        <label for="figure2">选择另一位历史人物：</label>
+                        <select id="figure2">
+                            {% for figure_id, fig in historical_figures.items() %}
+                                {% if figure_id != item.id %}
+                                <option value="{{ figure_id }}">{{ fig.name }} ({{ fig.era }})</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic">对话主题：</label>
+                        <input type="text" id="topic" placeholder="例如：文化交流、科技发展、权力与责任...">
+                    </div>
+                    <button id="startConnectionBtn" class="btn secondary-btn">开始跨时空对话</button>
+                </div>
+                
+                <div class="connection-result" style="display: none;">
+                    <h4>时空对话结果</h4>
+                    <div class="connection-content">
+                        <div class="loading">生成对话中...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 智慧博物馆 | 基于LangChain框架开发</p>
+        </footer>
+    </div>
+
+    <script>
+        const figureId = "{{ item.id }}";
+        const figureName = "{{ figure.name }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/dialog.js') }}"></script>
+</body>
+</html> 

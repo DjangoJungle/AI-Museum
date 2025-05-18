@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能博物馆导览</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 全屏背景部分 -->
+    <section class="hero">
+        <div class="hero-logo">
+            <div class="museum-logo">
+                <span class="logo-icon">✉️</span>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="main-title">
+                <h1 class="artistic-font">当历史会说话</h1>
+                <div class="title-decoration"></div>
+            </div>
+            <h2 class="subtitle-text">让人类文明的瑰宝，亲口告诉你他们的神奇</h2>
+            <p class="description-text">通过AI智能导览，开启一段沉浸式的博物馆体验</p>
+            <a href="#exhibits" class="btn primary-btn explore-btn">
+                <span class="btn-text">开始探索</span>
+                <span class="btn-icon">→</span>
+            </a>
+        </div>
+    </section>
+
+    <div class="container">
+        <main>
+            <section id="exhibits" class="exhibits">
+                <h2 class="section-title">精选展区</h2>
+                <div class="exhibit-grid">
+                    <div class="exhibit-card" onclick="location.href='/exhibit/ancient_china'">
+                        <div class="exhibit-img ancient-china"></div>
+                        <div class="exhibit-info">
+                            <h3>中国古代文明</h3>
+                            <p>从新石器时代到明清时期的历史文物</p>
+                            <a href="/exhibit/ancient_china" class="btn secondary-btn">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="exhibit-card" onclick="location.href='/exhibit/modern_art'">
+                        <div class="exhibit-img modern-art"></div>
+                        <div class="exhibit-info">
+                            <h3>现代艺术</h3>
+                            <p>20世纪以来的现代艺术作品展示</p>
+                            <a href="/exhibit/modern_art" class="btn secondary-btn">查看详情</a>
+                        </div>
+                    </div>
+
+                    <div class="exhibit-card" onclick="location.href='/exhibit/natural_history'">
+                        <div class="exhibit-img natural-history"></div>
+                        <div class="exhibit-info">
+                            <h3>自然历史</h3>
+                            <p>展示地球生命演化和自然奇观</p>
+                            <a href="/exhibit/natural_history" class="btn secondary-btn">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2 class="section-title">智能导览特色</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI智能讲解</h3>
+                        <p>基于大模型的智能问答系统，随时解答您的疑问</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔍</div>
+                        <h3>深度探索</h3>
+                        <p>获取展品背后的历史故事与文化内涵</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌐</div>
+                        <h3>沉浸体验</h3>
+                        <p>多媒体互动，带来身临其境的参观体验</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 智慧博物馆 | 基于LangChain框架开发</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

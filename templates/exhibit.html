@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ exhibit.name }} - 智能博物馆导览</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1><a href="/">智慧博物馆</a></h1>
+                <p class="subtitle">AI赋能的文化探索之旅</p>
+            </div>
+        </header>
+
+        <main class="exhibit-detail">
+            <div class="exhibit-header {{ category }}">
+                <div class="exhibit-header-content">
+                    <h2>{{ exhibit.name }}</h2>
+                    <p>{{ exhibit.description }}</p>
+                </div>
+                <a href="/" class="back-btn">返回首页</a>
+            </div>
+
+            <section class="exhibit-items">
+                <h3 class="section-title">展品列表</h3>
+                <div class="items-grid">
+                    {% for item in exhibit.exhibit_items %}
+                    <div class="item-card" data-item-id="{{ item.id }}">
+                        <div class="item-img {{ item.id }}"></div>
+                        <div class="item-info">
+                            <h4>{{ item.name }}</h4>
+                            <p class="item-era">{{ item.era }}</p>
+                            <p>{{ item.description }}</p>
+                            <div class="item-actions">
+                                <a href="/dialog/{{ item.id }}" class="btn time-dialog-btn">
+                                    <span class="btn-icon">🕰️</span> 时光对话
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="ai-guide">
+                <h3 class="section-title">AI智能导览</h3>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message system">
+                            <p>您好！我是您的AI导览助手。请问您想了解关于"{{ exhibit.name }}"的什么信息？</p>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="输入您的问题...">
+                        <button id="sendBtn" class="btn primary-btn">发送</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 智慧博物馆 | 基于LangChain框架开发</p>
+        </footer>
+    </div>
+
+    <script>
+        const category = "{{ category }}";
+        const exhibitName = "{{ exhibit.name }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/exhibit.js') }}"></script>
+</body>
+</html> 
